@@ -13,14 +13,14 @@ class Car {
 
     get brand() {
         return this.brand;
-      }
-    
-      set brand(newBrand) {
+    }
+
+    set brand(newBrand) {
         if (typeof newBrand !== 'string' || newBrand === '' || newBrand.length > 50) {
-          return;
+            return;
         }
-    
+
         this.brand = newBrand;
-      }
+    }
 }
 
