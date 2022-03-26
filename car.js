@@ -10,4 +10,17 @@ class Car {
         this.isStarted = isStarted;
         this.mileage = mileage;
     }
+
+    get brand() {
+        return this.brand;
+      }
+    
+      set brand(newBrand) {
+        if (typeof newBrand !== 'string' || newBrand === '' || newBrand.length > 50) {
+          return;
+        }
+    
+        this.brand = newBrand;
+      }
 }
+
