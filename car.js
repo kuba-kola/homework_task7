@@ -41,16 +41,15 @@ class Car {
         return this.#yearOfManufacturing;
     }
 
-    set yearOfManufacturing(newYearOfManufacturing) {
-        const now = new Date();
-        const currentYear = now.getFullYear();
-        const isIncorrect = !checkValid(newYearOfManufacturing) || newYearOfManufacturing > currentYear || newYearOfManufacturing <= 1900;
+    set yearOfManufacturing(newYear) {
+        const currentYear = new Date().getFullYear();
+        const isIncorrect = !Number.isFinite(newYear) || newYear > currentYear || newYear <= 1900;
 
         if (isIncorrect) {
             return;
         };
 
-        this.#yearOfManufacturing = newYearOfManufacturing;
+        this.#yearOfManufacturing = newYear;
     }
 
     get maxSpeed() {
@@ -58,7 +57,7 @@ class Car {
     }
 
     set maxSpeed(newMaxSpeed) {
-        const isIncorrect = newMaxSpeed <= 100 || newMaxSpeed >= 300 || !checkValid(newMaxSpeed);
+        const isIncorrect = newMaxSpeed <= 100 || newMaxSpeed >= 300 || !Number.isFinite(newMaxSpeed);
 
         if (isIncorrect) {
             return;
@@ -72,9 +71,9 @@ class Car {
     }
 
     set maxFuelVolume(newMaxFuelVolume) {
-        const isIncorrect = newMaxFuelVolume <= 5 || newMaxFuelVolume >= 20 || !checkValid(newMaxFuelVolume);
+        const isIncorrect = newMaxFuelVolume <= 5 || newMaxFuelVolume >= 20 || !Number.isFinite(newMaxFuelVolume);
 
-        if (!isIncorrect) {
+        if (isIncorrect) {
             return;
         };
 
@@ -86,7 +85,7 @@ class Car {
     }
 
     set fuelConsumption(newFuelConsumption) {
-        const isIncorrect = newFuelConsumption >= 10 || newFuelConsumption <= 25 || checkValid(newFuelConsumption);
+        const isIncorrect = newFuelConsumption >= 10 || newFuelConsumption <= 25 || !Number.isFinite(newFuelConsumption);
 
         if (isIncorrect) {
             return;
@@ -105,6 +104,36 @@ class Car {
 
     get mileage() {
         return this.#mileage;
+    }
+
+    start() {
+        if (this.isStarted) {
+            throw new Error(`Машина уже заведена`);
+        }
+      
+        this.#isStarted = true;
+    }
+
+    shutDownEngine() {
+        if (!this.isStarted) {
+            throw new Error (`Машина ещё не заведена`)
+        }
+
+        this.#isStarted = false;
+    }
+
+    fillUpGasTank(fuelVolume) {
+        if (!Number.isFinite(fuelVolume) || fuelVolume <= 0) {
+            throw new Error (`Неверное количество топлива для заправки`);
+        }
+
+        const isFuel = (this.#currentFuelVolume + fuelVolume) > this.#maxFuelVolume;
+
+        if (isFuel) {
+            throw new Error (`Топливный бак переполнен`);
+        }
+
+        this.#currentFuelVolume += fuelVolume;
     }
 }
 
