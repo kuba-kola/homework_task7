@@ -14,7 +14,7 @@ class Car {
     }
 
     set brand(newBrand) {
-        const isIncorrect = typeof newBrand !== 'string' || newBrand === '' || newBrand.length > 50;
+        const isIncorrect = typeof newBrand !== 'string' || newBrand === '' || newBrand.length >= 50 || newBrand.length <= 1;
         
         if (isIncorrect) {
             return;
@@ -28,7 +28,7 @@ class Car {
     }
     
     set model(newModel) {
-        const isIncorrect = typeof newModel !== 'string' || newModel === '' || newModel.length > 50;
+        const isIncorrect = typeof newModel !== 'string' || newModel === '' || newModel.length >= 50 || newModel.length <= 1;
 
         if (isIncorrect) {
             return;
@@ -44,7 +44,7 @@ class Car {
     set yearOfManufacturing(newYearOfManufacturing) {
         const now = new Date();
         const currentYear = now.getFullYear();
-        const isIncorrect = !checkValid(newYearOfManufacturing) || newYearOfManufacturing > currentYear || newYearOfManufacturing < 1900;
+        const isIncorrect = !checkValid(newYearOfManufacturing) || newYearOfManufacturing > currentYear || newYearOfManufacturing <= 1900;
 
         if (isIncorrect) {
             return;
