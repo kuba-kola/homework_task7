@@ -5,18 +5,18 @@ class Car {
     #maxSpeed;
     #maxFuelVolume;
     #fuelConsumption;
-    #currentFuelVolume;
-    #isStarted;
-    #mileage;
+    #currentFuelVolume = 0;
+    #isStarted = false;
+    #mileage = 0;
 
     get brand() {
         return this.#brand;
     }
 
     set brand(newBrand) {
-        const isIncorrect = typeof newBrand !== 'string' || newBrand === '' || newBrand.length >= 50 || newBrand.length <= 1;
+        const isCorrectBrand = typeof newBrand === 'string' || newBrand !== '' || newBrand.length <= 50 || newBrand.length >= 1;
         
-        if (isIncorrect) {
+        if (!isCorrectBrand) {
             return;
         }
 
@@ -28,9 +28,9 @@ class Car {
     }
     
     set model(newModel) {
-        const isIncorrect = typeof newModel !== 'string' || newModel === '' || newModel.length >= 50 || newModel.length <= 1;
+        const isCorrectModel = typeof newModel === 'string' || newModel !== '' || newModel.length <= 50 || newModel.length >= 1;
 
-        if (isIncorrect) {
+        if (!isCorrectModel) {
             return;
         }
 
@@ -43,9 +43,9 @@ class Car {
 
     set yearOfManufacturing(newYear) {
         const currentYear = new Date().getFullYear();
-        const isIncorrect = !Number.isFinite(newYear) || newYear > currentYear || newYear <= 1900;
+        const isCorrectYear = Number.isFinite(newYear) || newYear >= 1900 || newYear <= currentYear;
 
-        if (isIncorrect) {
+        if (!isCorrectYear) {
             return;
         };
 
@@ -57,9 +57,9 @@ class Car {
     }
 
     set maxSpeed(newMaxSpeed) {
-        const isIncorrect = newMaxSpeed <= 100 || newMaxSpeed >= 300 || !Number.isFinite(newMaxSpeed);
+        const isCorrectSpeed = Number.isFinite(newMaxSpeed) || newMaxSpeed >= 100 || newMaxSpeed <= 300;
 
-        if (isIncorrect) {
+        if (!isCorrectSpeed) {
             return;
         };
 
@@ -71,9 +71,9 @@ class Car {
     }
 
     set maxFuelVolume(newMaxFuelVolume) {
-        const isIncorrect = newMaxFuelVolume <= 5 || newMaxFuelVolume >= 20 || !Number.isFinite(newMaxFuelVolume);
+        const isCorrectVolume = Number.isFinite(newMaxFuelVolume) || newMaxFuelVolume >= 5 || newMaxFuelVolume <= 20;
 
-        if (isIncorrect) {
+        if (!isCorrectVolume) {
             return;
         };
 
@@ -85,9 +85,7 @@ class Car {
     }
 
     set fuelConsumption(newFuelConsumption) {
-        const isIncorrect = newFuelConsumption >= 10 || newFuelConsumption <= 25 || !Number.isFinite(newFuelConsumption);
-
-        if (isIncorrect) {
+        if (!Number.isFinite(newFuelConsumption)) {
             return;
         };
 
@@ -116,7 +114,7 @@ class Car {
 
     shutDownEngine() {
         if (!this.isStarted) {
-            throw new Error (`Машина ещё не заведена`)
+            throw new Error (`Машина ещё не заведена`);
         }
 
         this.#isStarted = false;
@@ -127,9 +125,9 @@ class Car {
             throw new Error (`Неверное количество топлива для заправки`);
         }
 
-        const isFuel = (this.#currentFuelVolume + fuelVolume) > this.#maxFuelVolume;
+        const isFull = (this.#currentFuelVolume + fuelVolume) > this.#maxFuelVolume;
 
-        if (isFuel) {
+        if (isFull) {
             throw new Error (`Топливный бак переполнен`);
         }
 
@@ -139,15 +137,15 @@ class Car {
     drive(speed, hours) {
         const distance = speed * hours;
         const requiredFuel = this.#fuelConsumption * distance / 100;
-        const isIncorrectSpeed = !Number.isFinite(speed) || speed <= 0;
-        const isIncorrectHours = !Number.isFinite(hours) || hours <= 0;
+        const isCorrectSpeed = Number.isFinite(speed) || speed > 0;
+        const isCorrectHours = Number.isFinite(hours) || hours > 0;
 
-        if (isIncorrectSpeed) {
+        if (!isCorrectSpeed) {
             throw new Error (`Неверная скорость`);
         }
 
-        if (isIncorrectHours) {
-            throw new Error (`Неверное количество часов`)
+        if (!isCorrectHours) {
+            throw new Error (`Неверное количество часов`);
         }
 
         if (speed > this.#maxSpeed) {
@@ -166,4 +164,3 @@ class Car {
         this.#mileage += distance;
     }
 }
-
