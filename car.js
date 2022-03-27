@@ -135,5 +135,35 @@ class Car {
 
         this.#currentFuelVolume += fuelVolume;
     }
+
+    drive(speed, hours) {
+        const distance = speed * hours;
+        const requiredFuel = this.#fuelConsumption * distance / 100;
+        const isIncorrectSpeed = !Number.isFinite(speed) || speed <= 0;
+        const isIncorrectHours = !Number.isFinite(hours) || hours <= 0;
+
+        if (isIncorrectSpeed) {
+            throw new Error (`Неверная скорость`);
+        }
+
+        if (isIncorrectHours) {
+            throw new Error (`Неверное количество часов`)
+        }
+
+        if (speed > this.#maxSpeed) {
+            throw new Error(`Машина не может ехать так быстро`);
+        }
+
+        if (!this.#isStarted) {
+            throw new Error(`Машина должна быть заведена, чтобы ехать`);
+        }
+
+        if (requiredFuel > this.#currentFuelVolume) {
+            throw new Error(`Недостаточно топлива`);
+        }
+
+        this.#currentFuelVolume -= requiredFuel;
+        this.#mileage += distance;
+    }
 }
 
