@@ -1,4 +1,4 @@
-class Car {
+export class Car {
     #brand;
     #model;
     #yearOfManufacturing;
@@ -14,7 +14,7 @@ class Car {
     }
 
     set brand(newBrand) {
-        const isCorrectBrand = typeof newBrand === 'string' || newBrand !== '' || newBrand.length <= 50 || newBrand.length >= 1;
+        const isCorrectBrand = typeof newBrand === 'string' && newBrand !== '' && newBrand.length <= 50 && newBrand.length >= 1;
         
         if (!isCorrectBrand) {
             return;
@@ -28,7 +28,7 @@ class Car {
     }
     
     set model(newModel) {
-        const isCorrectModel = typeof newModel === 'string' || newModel !== '' || newModel.length <= 50 || newModel.length >= 1;
+        const isCorrectModel = typeof newModel === 'string' && newModel !== '' && newModel.length <= 50 && newModel.length >= 1;
 
         if (!isCorrectModel) {
             return;
@@ -43,7 +43,7 @@ class Car {
 
     set yearOfManufacturing(newYear) {
         const currentYear = new Date().getFullYear();
-        const isCorrectYear = Number.isFinite(newYear) || newYear >= 1900 || newYear <= currentYear;
+        const isCorrectYear = Number.isFinite(newYear) && newYear >= 1900 && newYear <= currentYear;
 
         if (!isCorrectYear) {
             return;
@@ -57,7 +57,7 @@ class Car {
     }
 
     set maxSpeed(newMaxSpeed) {
-        const isCorrectSpeed = Number.isFinite(newMaxSpeed) || newMaxSpeed >= 100 || newMaxSpeed <= 300;
+        const isCorrectSpeed = Number.isFinite(newMaxSpeed) && newMaxSpeed >= 100 && newMaxSpeed <= 300;
 
         if (!isCorrectSpeed) {
             return;
@@ -71,7 +71,7 @@ class Car {
     }
 
     set maxFuelVolume(newMaxFuelVolume) {
-        const isCorrectVolume = Number.isFinite(newMaxFuelVolume) || newMaxFuelVolume >= 5 || newMaxFuelVolume <= 20;
+        const isCorrectVolume = Number.isFinite(newMaxFuelVolume) && newMaxFuelVolume >= 5 && newMaxFuelVolume <= 20;
 
         if (!isCorrectVolume) {
             return;
@@ -137,8 +137,8 @@ class Car {
     drive(speed, hours) {
         const distance = speed * hours;
         const requiredFuel = this.#fuelConsumption * distance / 100;
-        const isCorrectSpeed = Number.isFinite(speed) || speed > 0;
-        const isCorrectHours = Number.isFinite(hours) || hours > 0;
+        const isCorrectSpeed = Number.isFinite(speed) && speed > 0;
+        const isCorrectHours = Number.isFinite(hours) && hours > 0;
 
         if (!isCorrectSpeed) {
             throw new Error (`Неверная скорость`);
