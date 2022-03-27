@@ -1,18 +1,16 @@
 class Car {
-    constructor(brand, model, yearOfManufacturing, maxSpeed, maxFuelVolume, fuelConsumption, currentFuelVolume, isStarted, mileage) {
-        this.brand = brand;
-        this.model = model;
-        this.yearOfManufacturing = yearOfManufacturing;
-        this.maxSpeed = maxSpeed;
-        this.maxFuelVolume = maxFuelVolume;
-        this.fuelConsumption = fuelConsumption;
-        this.currentFuelVolume = currentFuelVolume;
-        this.isStarted = isStarted;
-        this.mileage = mileage;
-    }
+    #brand;
+    #model;
+    #yearOfManufacturing;
+    #maxSpeed;
+    #maxFuelVolume;
+    #fuelConsumption;
+    #currentFuelVolume;
+    #isStarted;
+    #mileage;
 
     get brand() {
-        return this.brand;
+        return this.#brand;
     }
 
     set brand(newBrand) {
@@ -22,11 +20,11 @@ class Car {
             return;
         }
 
-        this.brand = newBrand;
+        this.#brand = newBrand;
     }
 
     get model() {
-        return this.model;
+        return this.#model;
     }
     
     set model(newModel) {
@@ -36,11 +34,11 @@ class Car {
             return;
         }
 
-        this.model = newModel;
+        this.#model = newModel;
     }
 
     get yearOfManufacturing() {
-        return this.yearOfManufacturing;
+        return this.#yearOfManufacturing;
     }
 
     set yearOfManufacturing(newYearOfManufacturing) {
@@ -52,11 +50,11 @@ class Car {
             return;
         };
 
-        this.yearOfManufacturing = newYearOfManufacturing;
+        this.#yearOfManufacturing = newYearOfManufacturing;
     }
 
     get maxSpeed() {
-        return this.maxSpeed;
+        return this.#maxSpeed;
     }
 
     set maxSpeed(newMaxSpeed) {
@@ -66,11 +64,11 @@ class Car {
             return;
         };
 
-        this.maxSpeed = newMaxSpeed;
+        this.#maxSpeed = newMaxSpeed;
     }
 
     get maxFuelVolume() {
-        return this.maxFuelVolume;
+        return this.#maxFuelVolume;
     }
 
     set maxFuelVolume(newMaxFuelVolume) {
@@ -80,11 +78,11 @@ class Car {
             return;
         };
 
-        this.maxFuelVolume = newMaxFuelVolume;
+        this.#maxFuelVolume = newMaxFuelVolume;
     }
 
     get fuelConsumption() {
-        return this.fuelConsumption;
+        return this.#fuelConsumption;
     }
 
     set fuelConsumption(newFuelConsumption) {
@@ -94,19 +92,19 @@ class Car {
             return;
         };
 
-        this.fuelConsumption = newFuelConsumption;
+        this.#fuelConsumption = newFuelConsumption;
     }
 
     get currentFuelVolume() {
-        return this.currentFuelVolume;
+        return this.#currentFuelVolume;
     }
 
     get isStarted() {
-        return this.isStarted;
+        return this.#isStarted;
     }
 
     get mileage() {
-        return this.mileage;
+        return this.#mileage;
     }
 }
 
